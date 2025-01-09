@@ -1,0 +1,28 @@
+{% include "base.html" %}
+{% load static %}
+{% block main %}
+<link rel="stylesheet" href="{%static 'css/auth.css'%}">
+<form method="post" action="#">
+  <div class="auth-block-main">
+  {% csrf_token %}
+  <div class="auth-form">
+    <h3>Logg in p en bruker</h3>
+  <div class="mb-3">
+    <label for="email" class="form-label">Skriv inn eposten din</label>
+    {{login_f.email}}
+  </div>
+  <div class="mb-3">
+    <label for="username" class="form-label">Skriv brukernavnet ditt</label>
+    {{login_f.username}}
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Skriv passordet ditt</label>
+    {{login_f.password}}
+  </div>
+  <button class="btn btn-primary">Login</button>
+  <br>
+  <a href="{%url 'signup'%}">Trykk her for a opprette en ny konto</a>
+  </div>
+  </div>
+</form>
+{% endblock main %}

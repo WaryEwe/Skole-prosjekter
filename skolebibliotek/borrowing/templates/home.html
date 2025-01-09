@@ -1,4 +1,11 @@
 {% include "base.html" %}
 {% block main %}
-<h3>Home page</h3>
+<div class="main-container">
+  <h3>Velkommen til f21 sitt bibilotek</h3>
+  {% if request.user.is_authenticated %}
+  <h3>Du er for øyeblikket logget inn som <a href="{%url 'user' username=username%}">{{request.user.username}}</a></h3>
+  {% else %}
+  <p>For å starte må du <a href="{%url 'login'%}">Logge inn</a></p>
+  {%endif%}
+</div>
 {% endblock main %}
