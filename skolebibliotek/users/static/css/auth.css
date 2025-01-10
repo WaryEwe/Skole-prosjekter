@@ -2,6 +2,12 @@
   background-color: gold;
 }
 
+.auth-block-main {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  position: relative;
+}
 .auth-form {
         max-width: 400px;
         color: rgb(0, 0, 0);
@@ -9,6 +15,7 @@
         text-align: center;
         border-radius: 8px;
         display: flex;
+        position: relative;
         justify-content: center;
         align-items: center;
 

@@ -22,6 +22,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('borrowing.urls')),
     path('', include('users.urls')),
-]
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

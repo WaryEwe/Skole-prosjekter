@@ -2,10 +2,10 @@
 {% load static %}
 {% block main %}
 <link rel="stylesheet"  href="{%static 'css/auth.css'%}">
-<form method="post" action="#">
   <div class="auth-block-main">
-  {% csrf_token %}
   <div class="auth-form">
+    <form method="post" action="#">
+    {% csrf_token %}
     <h3>Opprett en bruker</h3>
   <div class="mb-3">
     <label for="email" class="form-label">Skriv inn eposten din</label>

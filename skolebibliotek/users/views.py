@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SignupForm
-
+from borrowing import forms
 def login_view(request):
     if request.method == 'POST':
         login_f = LoginForm(request.POST)
@@ -40,16 +40,27 @@ def profile_view(request, username):
     req_user = get_object_or_404(User, username=username)
     user_model, created = User.objects.get_or_create(id=req_user.id)
     user_url = reverse('user', kwargs={'username':username})
+    if request.method == 'POST' and request.user.is_staff:
+        borr_f = forms.BorrowingForm(request.POST, request.FILES, instance=req_user)
+        if borr_f.is_valid():
+            borr_f.save()
+            return redirect('home')
+        else:
+            print('test')
+    else:
+        borr_f = forms.BorrowingForm(instance=req_user)
+
     context = {
         'req_user':req_user,
         'user_url':user_url,
+        'borrowing_f':borr_f,
     }
     return render(request, 'profile.html', context)
 
 def logout_view(request):
     if request.user.is_authenticated:
         logout(request)
-        return redirect('')
+        return redirect('home')
     else:
-        return redirect('')
+        return redirect('home')
 
