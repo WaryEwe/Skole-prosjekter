@@ -17,23 +17,23 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="post" enctype="multipart/form-data>">
-          {% csrf_token %}
+        <form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
   <div class="form-group">
     <label for="exampleInputEmail1">Skriv inn tittelen til boken</label>
-    {{borrowing_f.borrowing_title}}
+    {{borr_f.borrowing_title}}
   </div>
   
   <div class="form-group">
     <label for="exampleInputEmail1">Skriv litt om boken</label>
-    {{borrowing_f.borrowing_desc}}
+    {{borr_f.borrowing_desc}}
   </div>
 
   <div class="form-group">
     <label for="exampleInputEmail1">Velg ett bilde av boken</label>
-    {{borrowing_f.borrowing_image}}
+    {{borr_f.borrowing_image}}
   </div>
-  <button class="btn btn-light">Legg til</button>
+  <button class="btn btn-light" type="submit">Legg til</button>
         </form>
       </div>
       <div class="modal-footer">

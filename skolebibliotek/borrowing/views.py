@@ -16,7 +16,6 @@ def upload_view(request):
     if request.method == 'POST':
         borrowing_f = BorrowingForm(request.POST, request.FILES)
         if borrowing_f.is_valid():
-            borrowing_f.save()
             return redirect('home')
         else:
             return redirect('test')

@@ -3,9 +3,12 @@
 <div class="main-container">
   <h3>Velkommen til f21 sitt bibilotek</h3>
   {% if request.user.is_authenticated %}
+  <div class="h-header-container">
+    
   <h3>Du er for øyeblikket logget inn som <a href="{%url 'user' username=username%}">{{request.user.username}}</a></h3>
   {% else %}
   <p>For å starte må du <a href="{%url 'login'%}">Logge inn</a></p>
   {%endif%}
+  </div>
 </div>
 {% endblock main %}
