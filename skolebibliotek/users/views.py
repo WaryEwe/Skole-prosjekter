@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SignupForm
 from borrowing import forms
-
+from borrowing import models
 def login_view(request):
     if request.method == 'POST':
         login_f = LoginForm(request.POST)
@@ -41,6 +41,7 @@ def profile_view(request, username):
     req_user = get_object_or_404(User, username=username)
     user_model, created = User.objects.get_or_create(id=req_user.id)
     user_url = reverse('user', kwargs={'username':username})
+    reserved_books = models.RentModel.objects.filter(borrower=req_user)
     if request.method == 'POST' and request.user.is_staff:
         borr_f = forms.BorrowingForm(request.POST, request.FILES)
         if borr_f.is_valid():
@@ -59,6 +60,7 @@ def profile_view(request, username):
         'req_user':req_user,
         'user_url':user_url,
         'borr_f':borr_f,
+        'reserved_books':reserved_books,
     }
     return render(request, 'profile.html', context)
 

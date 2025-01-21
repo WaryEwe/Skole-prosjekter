@@ -1,13 +1,23 @@
 {% extends "base.html" %}
+{% load static %}
 {% block main %}
+<link rel="stylesheet" href="{%static 'css/profile.css'%}">
+<div class="p-header-container">
+  
 <h2>Profil for {{req_user.username}}</h2>
+</div>
 <div class="profile-borrowers">
   <p>Dine utlån</p>
-  <a href="{%url 'logout'%}" class="btn btn-primary">Logg ut</a>
+  {% if reserved_books %}
+  test
+  {%else%}
+  <p>Du har ikke lånt noen bøker enda</p>
+  {% endif %}
+
+
 </div>
 {% if request.user.is_staff %}
 <div class="book-uploader">
-
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Legg til nye bøker</button>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -23,7 +33,7 @@
     <label for="exampleInputEmail1">Skriv inn tittelen til boken</label>
     {{borr_f.borrowing_title}}
   </div>
-  
+
   <div class="form-group">
     <label for="exampleInputEmail1">Skriv litt om boken</label>
     {{borr_f.borrowing_desc}}

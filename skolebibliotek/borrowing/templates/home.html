@@ -1,14 +1,41 @@
 {% include "base.html" %}
+{% load static %}
 {% block main %}
+<link rel="stylesheet"href="{%static 'css/home.css'%}">
 <div class="main-container">
-  <h3>Velkommen til f21 sitt bibilotek</h3>
-  {% if request.user.is_authenticated %}
-  <div class="h-header-container">
+   <section class="bg-primary text-white text-center py-5">
+        <div class="container">
+            <h1 class="display-4">Velkommen til f21 sitt bibilotek</h1>
+            <p class="lead">Explore thousands of books, articles, and more!</p>
+            <form method="POST" class="d-flex justify-content-center mt-4">
+              {% csrf_token %}
+                <input class="form-control me-2" type="search" placeholder="Search books..." aria-label="Search">
+                <button class="btn btn-dark" type="submit">Search</button>
+            </form>
+        </div>
+    </section>
+ <div>
     
-  <h3>Du er for øyeblikket logget inn som <a href="{%url 'user' username=username%}">{{request.user.username}}</a></h3>
-  {% else %}
-  <p>For å starte må du <a href="{%url 'login'%}">Logge inn</a></p>
-  {%endif%}
-  </div>
+   <h2 class="text-center mb-4">Boker</h2>
+   {% for borrow in borrowing %}
+    <section class="py-5">
+        <div class="container">
+            <div class="row-mt2">
+              <div class="card" style="width: 18rem;">
+                <img src="{{borrow.borrowing_image.url}}" width="122px" height="217px" class="card-img-top" >
+              <div class="card-body">
+              <h5 class="card-title">{{borrow.borrowing_title}}</h5>
+              <div class="h-borrowing-container">
+              </div>
+                <p class="card-text">{{borrow.borrowing_desc}}</p>
+                <a class="btn btn-primary" href="{%url 'rent' book_id=borrow.id%}">Lån</a>
+              </div>
+              </div>
+
+            </div>
+        </div>
+    </section>
+ </div> 
+ {% endfor %}
 </div>
 {% endblock main %}
