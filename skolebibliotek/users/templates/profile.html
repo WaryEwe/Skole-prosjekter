@@ -9,7 +9,27 @@
 <div class="profile-borrowers">
   <p>Dine utlån</p>
   {% if reserved_books %}
-  test
+  {% for book in reserved_books %}
+  
+    <section class="py-5">
+        <div class="container">
+            <div class="row-mt2">
+              <div class="card" style="width: 18rem;">
+                <img src="{{book.borrow_material.borrowing_image.url}}" width="122px" height="217px" class="card-img-top" >
+              <div class="card-body">
+              <h5 class="card-title">{{book.borrow_material.borrowing_title}}</h5>
+              <div class="h-borrowing-container">
+              </div>
+              <p class="card-text">Utløpningsdato: {{book.borrow_material.borrowing_date}}</p>
+              <button class="btn btn-primary">Lever</button>
+              </div>
+              </div>
+
+            </div>
+        </div>
+    </section>
+
+    {% endfor %}
   {%else%}
   <p>Du har ikke lånt noen bøker enda</p>
   {% endif %}
@@ -48,12 +68,12 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
 </div>
 </div>
+
 
 {% endif %}
 {% endblock main %}

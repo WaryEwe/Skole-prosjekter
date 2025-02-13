@@ -22,6 +22,20 @@ def rent_view(request, book_id):
     rent.save()
     return redirect('home')
 
-
-
-
+def search_book(request):
+    if request.user.is_authenticated:
+        query = request.GET.get('query')
+        title_books = BorrowingModel.objects.filter(borrowing_title=query)       
+        books = []
+        for book in title_books:
+            if book not in author_books:
+                books.append(book)
+        if books:
+            users = User.objects.all()
+            context = {
+                'books':books,
+            }
+    context = {
+        "books":books,
+    }
+    return render(request, 'search.html', context)

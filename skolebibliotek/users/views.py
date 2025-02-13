@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SignupForm
 from borrowing import forms
 from borrowing import models
+
 def login_view(request):
     if request.method == 'POST':
         login_f = LoginForm(request.POST)
@@ -48,7 +49,6 @@ def profile_view(request, username):
             borr_f_s = borr_f.save(commit=False)
             borr_f_s.borrowing_id = request.user
             borr_f_s.save()
-            print('testcorr')
             return redirect('home')
         else:
             print('test')
@@ -70,3 +70,8 @@ def logout_view(request):
         return redirect('home')
     else:
         return redirect('home')
+
+
+
+
+
